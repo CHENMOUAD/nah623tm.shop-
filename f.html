@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式投資特設ページ</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .page-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .image-section {
+            width: 100%;
+        }
+
+        .image-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .placeholder-section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222222;
+        }
+
+        .content-section {
+            width: 100%;
+            padding: 20px;
+            background-color: #121212;
+            box-sizing: border-box;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #00c300;
+        }
+
+        .content-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #dddddd;
+        }
+
+        .floating-line-icon {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: #00c300;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: blink 1s infinite;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-line-icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .floating-line-icon span {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: #ff4747;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4747;
+            color: #ffffff;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: breathe 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes breathe {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Line Icon -->
+        <div class="floating-line-icon" onclick="k4()">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg" alt="LINE">
+            <span>1</span>
+        </div>
+
+        <!-- Images -->
+        <div class="image-section" id="image-section">
+            <img src="img2/1.png" alt="画像1" onclick="k4()">
+            <img src="img2/2.png" alt="画像2" onclick="k4()">
+            <img src="img2/3.png" alt="画像3" onclick="k4()">
+            <img src="img2/4.png" alt="画像4"   onclick="k4()">
+			 <img src="img2/5.png" alt="画像1" onclick="k4()">
+            <img src="img2/6.png" alt="画像2" onclick="k4()">
+        </div>
+
+        <!-- Placeholder Sections (Empty Screens) -->
+        <div class="placeholder-section"></div>
+        <div class="placeholder-section"></div>
+        <div class="placeholder-section"></div>
+
+        <!-- Content Section -->
+        <div class="content-section">
+            <div class="content-title">イノベーションエコシステムとスタートアップ企業</div>
+            <div class="content-text">
+            日本の経済社会の発展は、以下の側面から概観することができます。
+
+第一に、経済面では、日本は世界第3位の経済大国です。戦後復興と高度成長を経験しましたが、1990年代以降は「失われた20年」に入り、経済成長は鈍化しています。近年、日本は特にハイテクとグリーンテクノロジーの分野において、技術革新と産業高度化を推進することで、経済構造転換を目指しています。
+
+第二に、人口問題は日本が直面する重要な課題です。高齢化と低出生率の継続は、労働力不足と社会保障への負担増大につながっています。政府はこの問題に対処するため、女性の労働市場への参加促進や外国人労働者の導入など、一連の対策を講じています。
+
+社会文化面では、日本は独自の文化と質の高い生活水準で多くの観光客を魅了しています。教育制度は充実しており、国民生活の質は概して高く、社会の安定と調和を促進しています。
+
+さらに、科学技術革新は日本経済の重要な原動力となっています。日本はロボット、自動車、エレクトロニクスといった分野で世界をリードする地位を維持しており、企業や政府は将来の経済成長を促進するために研究開発に積極的に投資しています。
+
+総じて、多くの課題に直面しながらも、日本の経済社会は技術革新、産業構造の転換、そして社会の調和において強い回復力を示し、グローバル化と人口動態の変化がもたらす新たな環境への適応に尽力してきました。   </div>
+        </div>
+
+        <!-- Bottom Button -->
+        <button class="floating-button" onclick="k4()">今すぐ参加</button>
+    </div>
+
+    <script>
+        let isScrollingAllowed = true;
+
+        window.addEventListener('scroll', () => {
+            const lastImage = document.getElementById('last-image');
+            const bounding = lastImage.getBoundingClientRect();
+
+            // Check if the last image is fully visible
+            if (bounding.top < window.innerHeight && bounding.bottom > 0) {
+                isScrollingAllowed = false; // Lock scrolling
+                window.scrollTo(0, window.scrollY); // Prevent further scroll
+            } else {
+                isScrollingAllowed = true; // Allow scrolling outside last image
+            }
+        });
+
+        function k4() {
+            window.location.href = "line://connect";
+        }
+    </script>
+</body>
+
+</html>
