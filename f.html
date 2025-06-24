@@ -2,11 +2,6 @@
 <html lang="ja">
 
 <head>
-	<script>
-  function k4() {
-            window.location.href = "https://www.qq.com";
-        }
-	</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>株式投資特設ページ</title>
@@ -151,9 +146,9 @@
             <img src="img2/1.png" alt="画像1" onclick="k4()">
             <img src="img2/2.png" alt="画像2" onclick="k4()">
             <img src="img2/3.png" alt="画像3" onclick="k4()">
-            <img src="img2/4.png" alt="画像4"   onclick="k4()">
-			 <img src="img2/5.png" alt="画像1" onclick="k4()">
-            <img src="img2/6.png" alt="画像2" onclick="k4()">
+            <img src="img2/4.png" alt="画像4" onclick="k4()">
+            <img src="img2/5.png" alt="画像5" onclick="k4()">
+            <img src="img2/6.png" alt="画像6" id="last-image" onclick="k4()">
         </div>
 
         <!-- Placeholder Sections (Empty Screens) -->
@@ -166,16 +161,7 @@
             <div class="content-title">イノベーションエコシステムとスタートアップ企業</div>
             <div class="content-text">
             日本の経済社会の発展は、以下の側面から概観することができます。
-
-第一に、経済面では、日本は世界第3位の経済大国です。戦後復興と高度成長を経験しましたが、1990年代以降は「失われた20年」に入り、経済成長は鈍化しています。近年、日本は特にハイテクとグリーンテクノロジーの分野において、技術革新と産業高度化を推進することで、経済構造転換を目指しています。
-
-第二に、人口問題は日本が直面する重要な課題です。高齢化と低出生率の継続は、労働力不足と社会保障への負担増大につながっています。政府はこの問題に対処するため、女性の労働市場への参加促進や外国人労働者の導入など、一連の対策を講じています。
-
-社会文化面では、日本は独自の文化と質の高い生活水準で多くの観光客を魅了しています。教育制度は充実しており、国民生活の質は概して高く、社会の安定と調和を促進しています。
-
-さらに、科学技術革新は日本経済の重要な原動力となっています。日本はロボット、自動車、エレクトロニクスといった分野で世界をリードする地位を維持しており、企業や政府は将来の経済成長を促進するために研究開発に積極的に投資しています。
-
-総じて、多くの課題に直面しながらも、日本の経済社会は技術革新、産業構造の転換、そして社会の調和において強い回復力を示し、グローバル化と人口動態の変化がもたらす新たな環境への適応に尽力してきました。   </div>
+            </div>
         </div>
 
         <!-- Bottom Button -->
@@ -183,22 +169,98 @@
     </div>
 
     <script>
-        let isScrollingAllowed = true;
+        let maxScrollPosition = null;
+        let lastScrollTop = 0;
 
-        window.addEventListener('scroll', () => {
+        // 计算最大滚动位置
+        function calculateMaxScrollPosition() {
             const lastImage = document.getElementById('last-image');
-            const bounding = lastImage.getBoundingClientRect();
+            if (lastImage) {
+                const rect = lastImage.getBoundingClientRect();
+                const imageBottom = window.scrollY + rect.bottom;
+                maxScrollPosition = imageBottom + 300; // 最后一个图片底部 + 300px
+            }
+        }
 
-            // Check if the last image is fully visible
-            if (bounding.top < window.innerHeight && bounding.bottom > 0) {
-                isScrollingAllowed = false; // Lock scrolling
-                window.scrollTo(0, window.scrollY); // Prevent further scroll
-            } else {
-                isScrollingAllowed = true; // Allow scrolling outside last image
+        // 页面加载完成后计算最大滚动位置
+        window.addEventListener('load', () => {
+            calculateMaxScrollPosition();
+        });
+
+        // 图片加载完成后重新计算最大滚动位置
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = document.querySelectorAll('#image-section img');
+            let loadedImages = 0;
+            
+            images.forEach(img => {
+                if (img.complete) {
+                    loadedImages++;
+                } else {
+                    img.addEventListener('load', () => {
+                        loadedImages++;
+                        if (loadedImages === images.length) {
+                            calculateMaxScrollPosition();
+                        }
+                    });
+                }
+            });
+            
+            if (loadedImages === images.length) {
+                calculateMaxScrollPosition();
             }
         });
 
-      
+        // 滚动事件处理
+        window.addEventListener('scroll', () => {
+            const currentScrollTop = window.scrollY;
+            
+            // 如果还没有计算出最大滚动位置，先计算
+            if (maxScrollPosition === null) {
+                calculateMaxScrollPosition();
+            }
+            
+            // 如果当前滚动位置超过了最大允许位置，且是向下滚动
+            if (maxScrollPosition !== null && 
+                currentScrollTop > maxScrollPosition && 
+                currentScrollTop > lastScrollTop) {
+                
+                // 阻止向下滚动，保持在最大允许位置
+                window.scrollTo(0, maxScrollPosition);
+            }
+            
+            lastScrollTop = currentScrollTop;
+        });
+
+        // 触摸事件处理（针对移动设备）
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            touchEndY = e.touches[0].clientY;
+            const currentScrollTop = window.scrollY;
+            
+            // 如果还没有计算出最大滚动位置，先计算
+            if (maxScrollPosition === null) {
+                calculateMaxScrollPosition();
+            }
+            
+            // 如果已经到达最大滚动位置且用户尝试向下滑动
+            if (maxScrollPosition !== null && 
+                currentScrollTop >= maxScrollPosition && 
+                touchEndY < touchStartY) {
+                
+                // 阻止默认的滚动行为
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        function k4() {
+            window.location.href = "line://connect";
+        }
     </script>
 </body>
 
